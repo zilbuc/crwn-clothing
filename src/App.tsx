@@ -1,14 +1,11 @@
 import React from 'react';
 import './App.css';
-import HomePage from './homepage.component';
+import HomePage from './pages/homepage/homepage.component';
 
-const App: React.FC = () => {
+export const App: React.FC = (): JSX.Element => {
   return (
     <div >
-      Is it working? Starting mega React project
       <HomePage />
     </div>
   );
 }
-
-export default App;
