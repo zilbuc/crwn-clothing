@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { sections } from './directory.data';
-import MenuItem from '../menu-item/menu-item.component';
+import { MenuItemRouted as MenuItem } from '../menu-item/menu-item.component';
 import './directory.styles.scss';
 
 interface Sections {
@@ -11,16 +11,15 @@ interface Sections {
   size?: string;
 }
 
-type Props = {
-  // label: string;
-};
+// type Props = {
+// };
 
 type State = {
   sections: Sections[];
 };
 
-export class Directory extends Component<Props, State> {
-  constructor(props: Props) {
+export class Directory extends Component<{}, State> {
+  constructor(props: {}) {
     super(props);
 
     this.state = {

@@ -21,4 +21,5 @@ const MenuItem: React.FC<Props> = ({ title, imageUrl, size, linkUrl, history, ma
   );
 };
 
-export default withRouter(MenuItem);
+// TODO: add prop types?
+export const MenuItemRouted = withRouter(MenuItem);
