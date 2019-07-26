@@ -11,11 +11,6 @@ type State = {
   password: string;
 };
 
-// interface Event<T> extends FormEvent {
-//   email: string;
-//   password: string;
-// }
-
 export class SignIn extends Component<Props, State> {
   constructor(props: Props) {
     super(props)
@@ -33,7 +28,6 @@ export class SignIn extends Component<Props, State> {
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = event.target;
-    console.log(value);
     this.setState((prevState: State): State => ({
       ...prevState,
       [name]: value

@@ -5,7 +5,7 @@ type Props = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   name: string;
-  type: 'email' | 'password';
+  type: 'email' | 'password' | 'text';
   value: string;
   required: boolean;
 }

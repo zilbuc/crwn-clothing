@@ -5,21 +5,14 @@ import { Switch, Route } from 'react-router-dom';
 import { ShopPage } from './pages/shop/shop.component';
 import { SignInAndSignUpPage } from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { Header } from './components/header/header.component';
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { Unsubscribe } from 'firebase';
-
-// interface currentUser {
-//   id: number;
-//   title: string;
-//   routeName: string;
-//   items: Item[]
-// }
 
 type Props = {
 };
 
 type State = {
-  currentUser: any; // TODO: update type
+  currentUser: any; //UserInfo | null; // TODO: update type?
 };
 
 export class App extends Component<Props, State> {
@@ -34,17 +27,28 @@ export class App extends Component<Props, State> {
   unsubsribeFromAuth: null | Unsubscribe = null;
 
   componentDidMount() {
-    this.unsubsribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
+    this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth, {});
 
-      console.log(user);
+        userRef.onSnapshot(snapshot => {
+          this.setState({
+            currentUser: {
+              id: snapshot.id,
+              ...snapshot.data()
+            }
+          })
+        })
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
     })
   }
 
   componentWillUnmount() {
-    this.unsubsribeFromAuth !== null
-      ? this.unsubsribeFromAuth()
-      : console.log('pypt')
+    if (this.unsubsribeFromAuth !== null) {
+      this.unsubsribeFromAuth();
+    }
   }
 
   render() {
