@@ -37,7 +37,7 @@ export class App extends Component<Props, State> {
               id: snapshot.id,
               ...snapshot.data()
             }
-          })
+          }, () => console.log(this.state))
         })
       } else {
         this.setState({ currentUser: userAuth });

@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
   type?: 'submit';
   onClick?: (event: React.SyntheticEvent<Element, Event>) => void;
-  isGoogleSignIn?: boolean; // TODO: add type
+  isGoogleSignIn?: boolean;
 }
 
 export const CustomButton: React.FC<Props> = ({ children, isGoogleSignIn, ...otherProps }): JSX.Element => {

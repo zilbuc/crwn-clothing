@@ -1,7 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { UserInfo, User } from 'firebase';
+import { User } from 'firebase';
 
 
 const config = {
