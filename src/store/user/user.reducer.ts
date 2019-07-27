@@ -1,6 +1,6 @@
 import {
   UserState,
-  SET_CURRENT_USER,
+  UserActionCreatorTypes,
   UserActionTypes
 } from './user.types';
 
@@ -8,9 +8,9 @@ const initialState: UserState = {
   currentUser: null
 }
 
-export const userReducer = (state = initialState, action: UserActionTypes): UserState => {
+export const userReducer = (state = initialState, action: UserActionCreatorTypes): UserState => {
   switch (action.type) {
-    case SET_CURRENT_USER:
+    case UserActionTypes.SET_CURRENT_USER:
       return {
         ...state,
         currentUser: action.payload

@@ -36,8 +36,8 @@ const Header: React.FC<HeaderProps> = ({ currentUser }): JSX.Element => {
   )
 }
 
-const mapStateToProps = (state: AppState) => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({ user }: AppState) => ({
+  currentUser: user.currentUser
 });
 
 export const HeaderRedux = connect(mapStateToProps, null)(Header);

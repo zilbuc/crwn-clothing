@@ -4,11 +4,13 @@ export interface UserState {
   currentUser: CurrentUser;
 }
 
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const UserActionTypes = {
+  SET_CURRENT_USER: 'SET_CURRENT_USER'
+};
 
 interface SetCurrentUserAction {
-  type: typeof SET_CURRENT_USER;
+  type: typeof UserActionTypes.SET_CURRENT_USER;
   payload: CurrentUser;
 }
 
-export type UserActionTypes = SetCurrentUserAction; 
+export type UserActionCreatorTypes = SetCurrentUserAction; 
