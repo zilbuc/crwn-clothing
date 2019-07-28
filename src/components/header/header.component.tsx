@@ -6,12 +6,15 @@ import { auth } from '../../firebase/firebase.utils';
 import { connect } from 'react-redux';
 import { AppState } from '../../store';
 import { CurrentUser } from '../../store/user';
+import { CartIconRedux as CartIcon } from '../cart-icon/cart-icon.component';
+import { CartDropdown } from '../cart-dropdown/cart-dropdown.component';
 
 interface HeaderProps {
   currentUser: CurrentUser;
+  hidden: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ currentUser }): JSX.Element => {
+const Header: React.FC<HeaderProps> = ({ currentUser, hidden }): JSX.Element => {
   return (
     <div className='header'>
       <Link className='logo-container' to='/' >
@@ -27,17 +30,20 @@ const Header: React.FC<HeaderProps> = ({ currentUser }): JSX.Element => {
         {
           currentUser
             ? <div className='option' onClick={() => auth.signOut()} > SIGN OUT </div>
-            : (<Link className='option' to='/signin' >
-              SIGN IN
-              </Link>)
+            : <Link className='option' to='/signin' > SIGN IN </Link>
         }
+        <CartIcon />
       </div>
+      {
+        hidden ? null : <CartDropdown />
+      }
     </div>
   )
 }
 
-const mapStateToProps = ({ user }: AppState) => ({
-  currentUser: user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }: AppState) => ({
+  currentUser,
+  hidden
 });
 
 export const HeaderRedux = connect(mapStateToProps, null)(Header);
