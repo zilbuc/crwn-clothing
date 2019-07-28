@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { SHOP_DATA as collections } from './shop.data';
 import { CollectionPreview } from '../../components/collection-preview/collection-preview.component';
-
-export type Item = {
-  id: number;
-  name: string;
-  imageUrl: string;
-  price: number;
-}
+import { Item } from '../../store/cart';
 
 interface Collections {
   id: number;

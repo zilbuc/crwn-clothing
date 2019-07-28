@@ -1,7 +1,7 @@
 import React from 'react';
 import './collection-preview.styles.scss';
-import { Item } from '../../pages/shop/shop.component';
-import { CollectionItem } from '../../components/collection-item/collection-item.component';
+import { Item } from '../../store/cart';
+import { CollectionItemRedux as CollectionItem } from '../../components/collection-item/collection-item.component';
 
 type Props = {
   title: string;
@@ -14,9 +14,9 @@ export const CollectionPreview: React.FC<Props> = ({ title, items }): JSX.Elemen
       <h1 className='title'>{title.toUpperCase()}</h1>
       <div className='preview'>
         {items
-          .filter((item: Item) => item.id < 5)
-          .map(({ ...CollectionItemProps }: Item): JSX.Element => {
-            return <CollectionItem key={CollectionItemProps.id} {...CollectionItemProps} />
+          .filter((item: Item, idx: number) => idx < 4)
+          .map((item: Item): JSX.Element => {
+            return <CollectionItem key={item.id} item={item} />
           })}
       </div>
     </div>

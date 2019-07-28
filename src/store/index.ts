@@ -5,6 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { userReducer } from './user';
 import { cartReducer } from './cart';
 
+// const rootReducer = combineReducers<any, AnyAction>({ // TODO: double-check
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer
