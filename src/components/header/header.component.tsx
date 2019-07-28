@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { AppState } from '../../store';
 import { CurrentUser } from '../../store/user';
 import { CartIconRedux as CartIcon } from '../cart-icon/cart-icon.component';
-import { CartDropdown } from '../cart-dropdown/cart-dropdown.component';
+import { CartDropdownRedux as CartDropdown } from '../cart-dropdown/cart-dropdown.component';
 
 interface HeaderProps {
   currentUser: CurrentUser;
