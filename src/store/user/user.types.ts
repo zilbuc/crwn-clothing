@@ -1,14 +1,6 @@
-// export type CurrentUser = {
-//   id: string;
-//   createdAt: {
-//     seconds: number;
-//     nanoseconds: number;
-//   };
-//   displayName: string;
-//   email: string;
-// }; // TODO: update type
-
-export type CurrentUser = any;
+// import { User } from 'firebase';
+// export type CurrentUser = User;
+export type CurrentUser = any; // TODO: update
 
 export interface UserState {
   currentUser: CurrentUser;

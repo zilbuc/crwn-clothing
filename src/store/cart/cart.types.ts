@@ -15,7 +15,9 @@ export interface CartState {
 
 export const CartActionTypes = {
   TOGGLE_CART: 'TOGGLE_CART',
-  ADD_ITEM: 'ADD_ITEM'
+  ADD_ITEM: 'ADD_ITEM',
+  REMOVE_ITEM: 'REMOVE_ITEM',
+  CLEAR_ITEM: 'CLEAR_ITEM'
 }
 
 interface ShowCartAction extends AnyAction {  // TODO: double-check
@@ -27,4 +29,14 @@ interface AddItem {
   payload: Item;
 }
 
-export type CartActionCreatorTypes = ShowCartAction | AddItem; 
+interface RemoveItem {
+  type: typeof CartActionTypes.REMOVE_ITEM;
+  payload: Item;
+}
+
+interface ClearItem {
+  type: typeof CartActionTypes.CLEAR_ITEM;
+  payload: Item;
+}
+
+export type CartActionCreatorTypes = ShowCartAction | AddItem | RemoveItem | ClearItem; 
