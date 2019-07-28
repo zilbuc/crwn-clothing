@@ -4,7 +4,7 @@ import { CustomButton } from '../custom-button/custom-button.component';
 import { CartItem } from '../cart-item/cart-item.component';
 import { connect } from 'react-redux';
 import { AppState } from '../../store/index';
-import { Item } from '../../store/cart';
+import { Item, selectCartItems } from '../../store/cart';
 
 interface Props {
   cartItems: Item[]
@@ -25,8 +25,8 @@ const CartDropdown: React.FC<Props> = ({ cartItems }): JSX.Element => {
   )
 }
 
-const mapStateToProps = ({ cart }: AppState) => ({
-  cartItems: cart.cartItems
+const mapStateToProps = (state: AppState) => ({
+  cartItems: selectCartItems(state)
 });
 
 export const CartDropdownRedux = connect(mapStateToProps, null)(CartDropdown);
