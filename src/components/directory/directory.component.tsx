@@ -1,41 +1,29 @@
-import React, { Component } from 'react';
-import { sections } from './directory.data';
+import React from 'react';
+import { Section, selectDirectorySections } from '../../store/directory';
 import { MenuItemRouted as MenuItem } from '../menu-item/menu-item.component';
 import './directory.styles.scss';
+import { connect } from 'react-redux';
+import { AppState } from '../../store/index';
 
-interface Sections {
-  title: string;
-  imageUrl: string;
-  id: number;
-  linkUrl: string;
-  size?: string;
-}
-
-// type Props = {
-// };
-
-type State = {
-  sections: Sections[];
+type Props = {
+  sections: Section[]
 };
 
-export class Directory extends Component<{}, State> {
-  constructor(props: {}) {
-    super(props);
+const Directory: React.FC<Props> = ({ sections }): JSX.Element => {
 
-    this.state = {
-      sections: sections
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <div className='directory-menu'>
-          {this.state.sections.map(({ id, ...OtherSectionProps }: Sections): JSX.Element => {
-            return <MenuItem key={id} {...OtherSectionProps} />
-          })}
-        </div>
+  return (
+    <div>
+      <div className='directory-menu'>
+        {sections.map(({ id, ...OtherSectionProps }: Section): JSX.Element => {
+          return <MenuItem key={id} {...OtherSectionProps} />
+        })}
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+const mapStateToProps = (state: AppState) => ({
+  sections: selectDirectorySections(state)
+});
+
+export const DirectoryRedux = connect(mapStateToProps, null)(Directory);

@@ -1,6 +1,6 @@
 import React from 'react';
 import './homepage.styles.scss';
-import { Directory } from '../../components/directory/directory.component';
+import { DirectoryRedux as Directory } from '../../components/directory/directory.component';
 
 const HomePage: React.FC = (): JSX.Element => {
   return (

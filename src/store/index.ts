@@ -3,12 +3,16 @@ import logger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { userReducer } from './user';
 import { cartReducer } from './cart';
+import { directoryReducer } from './directory';
+import { shopReducer } from './shop';
 import { loadState } from './localStorage';
 
 // const rootReducer = combineReducers<any, AnyAction>({ // TODO: double-check
 const rootReducer = combineReducers({
   user: userReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  directory: directoryReducer,
+  shop: shopReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
