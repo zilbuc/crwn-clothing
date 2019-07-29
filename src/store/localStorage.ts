@@ -15,7 +15,7 @@ export const loadState = (): AppState | undefined => {
 export const saveState = (state: AppState): void => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('artistReduxStore', serializedState);
+    localStorage.setItem('crownClothingReduxStore', serializedState);
   } catch (e) {
     // ignore write errors
   }
