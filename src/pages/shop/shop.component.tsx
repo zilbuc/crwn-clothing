@@ -6,8 +6,6 @@ import { RouteComponentProps, Route } from 'react-router-dom';
 interface Props extends RouteComponentProps { };
 
 export const ShopPage: React.FC<Props> = ({ match }): JSX.Element => {
-  console.log(match);
-
   return (
     <div className='shop-page'>
       <Route exact path={`${match.path}`} component={CollectionsOverview} />
