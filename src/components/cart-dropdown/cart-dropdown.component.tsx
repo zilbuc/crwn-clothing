@@ -18,7 +18,6 @@ const CartDropdown: React.FC<Props> = ({ cartItems, history, dispatch, ...otherP
   const goToCheckout = (): void => {
     history.push('/checkout');
     dispatch(toggleCart());
-    console.log(otherProps)
   }
 
   return (

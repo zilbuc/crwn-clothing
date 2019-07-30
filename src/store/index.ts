@@ -1,4 +1,4 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose, Middleware } from 'redux';
 import logger from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import { userReducer } from './user';
@@ -29,7 +29,11 @@ declare global {
 export const configureStore = () => {
   const persistedState: AppState | undefined = loadState();
 
-  const middlewares = [logger, thunkMiddleware];
+  const middlewares: Middleware[] = [thunkMiddleware];
+
+  if (process.env.NODE_ENV === 'development') {
+    middlewares.push(logger);
+  }
 
   const composeEnhancers =
     typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
