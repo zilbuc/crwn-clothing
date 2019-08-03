@@ -1,7 +1,7 @@
 import React from 'react';
-import './custom-button.styles.scss';
+import { CustomButtonContainer } from './custom-button.styles';
 
-type Props = {
+export type Props = {
   children: React.ReactNode;
   type?: 'submit';
   onClick?: (event: React.SyntheticEvent<Element, Event>) => void; // TODO: double-check for type in CollectionItem
@@ -9,14 +9,10 @@ type Props = {
   inverted?: boolean;
 }
 
-export const CustomButton: React.FC<Props> = ({ children, isGoogleSignIn, inverted, ...otherProps }): JSX.Element => {
+export const CustomButton: React.FC<Props> = ({ children, ...otherProps }): JSX.Element => {
   return (
-    <button
-      className={
-        `${isGoogleSignIn ? 'google-sign-in' : ''}
-        ${inverted ? 'inverted' : ''}
-        custom-button`} {...otherProps} >
+    <CustomButtonContainer {...otherProps} >
       {children}
-    </button>
+    </CustomButtonContainer>
   )
 }

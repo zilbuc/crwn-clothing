@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 import StripeCheckout, { Token } from 'react-stripe-checkout';
 
 type Props = {
   price: number;
 }
 
-export const StripeCheckoutButton: React.FC<Props> = ({ price }): JSX.Element => {
+export const StripeCheckoutButton: FC<Props> = ({ price }): JSX.Element => {
   const priceForStripe = price * 100;
 
   const publishableKey = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY ? process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY : 'anystring';
