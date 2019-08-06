@@ -6,23 +6,26 @@ import { ShopPage } from './pages/shop/shop.component';
 import { SignInAndSignUpPage } from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { HeaderRedux as Header } from './components/header/header.component';
 import { CheckoutPageRedux as CheckoutPage } from './pages/checkout/checkout.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
 import { Unsubscribe } from 'firebase';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { AppState } from './store';
 import { CurrentUser, setCurrentUser, selectCurrentUser } from './store/user';
+import { selectShopCollectionsForPreview, Collection } from './store/shop';
+import { CollectionForFirebase } from './firebase/firebase.utils'
 
 interface AppProps {
   currentUser: CurrentUser;
   setCurrentUser: typeof setCurrentUser;
+  collectionsArray: Collection[]
 }
 
 class App extends Component<AppProps> {
   unsubsribeFromAuth: null | Unsubscribe = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props;
+    const { setCurrentUser, collectionsArray } = this.props;
 
     this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -38,6 +41,9 @@ class App extends Component<AppProps> {
         setCurrentUser(userAuth);
       }
     })
+
+    const collectionsArrayForFirebase: CollectionForFirebase[] = collectionsArray.map(({ title, items }) => ({ title, items }));
+    addCollectionAndDocuments('collections', collectionsArrayForFirebase);
   }
 
   componentWillUnmount() {
@@ -69,7 +75,8 @@ class App extends Component<AppProps> {
 }
 
 const mapStateToProps = (state: AppState) => ({
-  currentUser: selectCurrentUser(state)
+  currentUser: selectCurrentUser(state),
+  collectionsArray: selectShopCollectionsForPreview(state)
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

@@ -2,7 +2,12 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { User } from 'firebase';
+import { Item } from '../store/cart/index';
 
+export type CollectionForFirebase = {
+  title: string;
+  items: Item[]
+};
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -42,6 +47,17 @@ export const createUserProfileDocument = async (userAuth: User, additionalData: 
   return userRef;
 }
 
+export const addCollectionAndDocuments = async (collectionKey: string, objectsToAdd: CollectionForFirebase[]) => {
+  const collectionRef = firestore.collection(collectionKey);
+
+  const batch = firestore.batch();
+  objectsToAdd.forEach((obj: CollectionForFirebase): void => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit()
+}
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
